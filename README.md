@@ -1,2 +1,3 @@
 # mevn-starter
-Starter setup for application on MongoDB-Express-Vue-Node Stack, using Cypress for testing
+
+> Starter setup for MongoDB-Express-Vue-Node with Jest for testing
