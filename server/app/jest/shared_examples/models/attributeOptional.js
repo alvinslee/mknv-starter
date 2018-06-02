@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const sharedSpec = ({instance, attribute}) => {
+module.exports = ({instance, attribute}) => {
   it('can be empty', async () => {
     instance[attribute] = ''
     try {
@@ -11,5 +11,3 @@ const sharedSpec = ({instance, attribute}) => {
     }
   })
 }
-
-module.exports = sharedSpec

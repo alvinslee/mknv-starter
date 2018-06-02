@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const sharedSpec = ({Model, instance, attribute}) => {
+module.exports = ({Model, instance, attribute}) => {
   it('must be unique', async () => {
     expect.assertions(1)
     const instanceData = instance.toObject()
@@ -20,5 +20,3 @@ const sharedSpec = ({Model, instance, attribute}) => {
     }
   })
 }
-
-module.exports = sharedSpec

@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const sharedSpec = ({instance, attribute, length}) => {
+module.exports = ({instance, attribute, length}) => {
   it('must have minimum length of ' + length, async () => {
     expect.assertions(1)
     instance[attribute] = new Array(length + 1).join('A')
@@ -17,5 +17,3 @@ const sharedSpec = ({instance, attribute, length}) => {
     }
   })
 }
-
-module.exports = sharedSpec

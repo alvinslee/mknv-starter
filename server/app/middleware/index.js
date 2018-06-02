@@ -12,7 +12,6 @@ let authenticateToken = async (ctx, next) => {
       return next()
     }
   } catch (ignore) {
-    console.log(ignore)
   }
   ctx.response.status = 403
   ctx.body = {

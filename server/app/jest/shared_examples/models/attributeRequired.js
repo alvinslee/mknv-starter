@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const sharedSpec = ({instance, attribute}) => {
+module.exports = ({instance, attribute}) => {
   it('must not be empty', async () => {
     expect.assertions(1)
     instance[attribute] = ''
@@ -11,5 +11,3 @@ const sharedSpec = ({instance, attribute}) => {
     }
   })
 }
-
-module.exports = sharedSpec

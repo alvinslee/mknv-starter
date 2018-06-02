@@ -1,10 +1,11 @@
 const User = require('./model')
 
-exports.getUsers = async (context) => {
-  const users = await User.find({})
-  if (!users) {
+async function getAll () {
+  try {
+    return User.find().select('id email')
+  } catch (e) {
     throw new Error('There was an error retrieving your users.')
-  } else {
-    context.body = users
   }
 }
+
+module.exports = { getAll }

@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const sharedSpec = ({instance, attribute, type, allowNull}) => {
+module.exports = ({instance, attribute, type, allowNull}) => {
   it('must be ' + type.name + ' type', async () => {
     expect.assertions(1)
     let validValue
@@ -44,5 +44,3 @@ const sharedSpec = ({instance, attribute, type, allowNull}) => {
     })
   }
 }
-
-module.exports = sharedSpec

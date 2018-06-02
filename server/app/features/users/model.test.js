@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-const { itHasBehavior } = require('../../jest/itHasBehavior')
+const itHasBehavior = require('../../jest/itHasBehavior')
 
 const User = require('./model')
 const factory = require('./test_support')
@@ -9,8 +9,8 @@ const momentTimezone = require('moment-timezone')
 
 describe('Users (Model)', () => {
   describe('#email', () => {
-    itHasBehavior('attributeRequired', { instance: factory.valid(), attribute: 'email' })
-    itHasBehavior('attributeUnique', { Model: User, instance: factory.valid(), attribute: 'email' })
+    itHasBehavior('attribute is required', { instance: factory.valid(), attribute: 'email' })
+    itHasBehavior('attribute is unique', { Model: User, instance: factory.valid(), attribute: 'email' })
     describe('when saving', () => {
       it('is downcased and then saved', async () => {
         expect.assertions(2)
@@ -28,8 +28,8 @@ describe('Users (Model)', () => {
     })
   })
   describe('#password', () => {
-    itHasBehavior('attributeRequired', { instance: factory.valid(), attribute: 'password' })
-    itHasBehavior('attributeMinimumLength', { instance: factory.valid(), attribute: 'password', length: 8 })
+    itHasBehavior('attribute is required', { instance: factory.valid(), attribute: 'password' })
+    itHasBehavior('attribute has minimum length', { instance: factory.valid(), attribute: 'password', length: 8 })
     it('is encrypted upon save', async () => {
       expect.assertions(2)
       const user = factory.mock()

@@ -6,9 +6,8 @@ const jwt = require('jsonwebtoken')
 
 router.post('/', async (ctx) => {
   let params = ctx.request.body
-  let success = false
-  let token = null
 
+  ctx.body = { success: false }
   ctx.status = 200
 
   params.email = params.email || ''
@@ -18,8 +17,8 @@ router.post('/', async (ctx) => {
       const user = await User.findOne({ email: params.email })
       if (user) {
         if (await user.validPassword(params.password)) {
-          success = true
-          token = jwt.sign({}, Config.jwt.secret)
+          ctx.body.success = true
+          ctx.body.token = jwt.sign({ id: user.id }, Config.jwt.secret)
         }
       }
     } catch (e) {
@@ -27,7 +26,6 @@ router.post('/', async (ctx) => {
       ctx.status = 500
     }
   }
-  ctx.body = { success, token }
 })
 
 module.exports = router.routes()
