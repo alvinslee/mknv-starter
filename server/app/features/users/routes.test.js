@@ -16,7 +16,7 @@ let createSavedUser = async () => {
 }
 
 let createToken = (user) => {
-  return jwt.sign({ id: user.id }, Config.jwt.secret)
+  return jwt.sign({ data: { user_id: user.id } }, Config.jwt.secret)
 }
 
 afterEach(() => {

@@ -3,7 +3,7 @@ const unprotectedApi = new (require('koa-router'))()
 const protectedApi = new (require('koa-router'))()
 const Middleware = require('./middleware')
 const bodyParser = require('koa-bodyparser')
-// const morgan = require('koa-morgan')
+const morgan = require('koa-morgan')
 const Config = require('./config')
 const PORT = process.env.PORT || 8080
 
@@ -21,9 +21,11 @@ unprotectedApi.use(Config.api.prefix + Accounts.routePrefix, Accounts.routes)
 const Users = require('./features/users')
 protectedApi.use(Config.api.prefix + Users.routePrefix, Users.routes)
 
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'))
+}
 app
   .use(bodyParser())
-//  .use(morgan('dev'))
   .use(unprotectedApi.routes())
   .use(unprotectedApi.allowedMethods())
   .use(Middleware.authenticateToken)
@@ -31,7 +33,9 @@ app
   .use(protectedApi.allowedMethods())
 
 const server = app.listen(PORT).on('error', error => {
-  console.log(error)
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(error)
+  }
 })
 
 module.exports = server

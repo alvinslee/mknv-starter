@@ -18,7 +18,12 @@ router.post('/', async (ctx) => {
       if (user) {
         if (await user.validPassword(params.password)) {
           ctx.body.success = true
-          ctx.body.token = jwt.sign({ id: user.id }, Config.jwt.secret)
+          ctx.body.token = jwt.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            data: {
+              user_id: user.id
+            }
+          }, Config.jwt.secret)
         }
       }
     } catch (e) {

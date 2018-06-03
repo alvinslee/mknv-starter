@@ -18,4 +18,8 @@ module.exports = async ({ method, route, params }) => {
       expect(response.status).toEqual(403)
     })
   })
+  xdescribe('when token has expired', () => {
+  })
+  xdescribe('when token has been revoked', () => {
+  })
 }
