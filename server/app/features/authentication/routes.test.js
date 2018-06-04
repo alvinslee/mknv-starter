@@ -66,7 +66,7 @@ describe('Authentication (Routes)', () => {
         expect(response.body.success).toEqual(true)
         expect(response.body.token).not.toBeUndefined()
         const tokenContents = await jwt.verify(response.body.token, Config.jwt.secret)
-        expect(tokenContents.data.user_id).toEqual(user.id)
+        expect(tokenContents.data.userId).toEqual(user.id)
       })
     })
   })

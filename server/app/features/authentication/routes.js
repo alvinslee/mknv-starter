@@ -21,7 +21,7 @@ router.post('/', async (ctx) => {
           ctx.body.token = jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
             data: {
-              user_id: user.id
+              userId: user.id
             }
           }, Config.jwt.secret)
         }

@@ -7,7 +7,7 @@ let authenticateToken = async (ctx, next) => {
     const token = ctx.headers.authorization
     if (token) {
       const decoded = await jwt.verify(token, Config.jwt.secret)
-      let user = await User.findById(decoded.data.user_id)
+      let user = await User.findById(decoded.data.userId)
       ctx.response.authentication = { id: user.id, email: user.email }
       return next()
     }
