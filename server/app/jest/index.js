@@ -1,10 +1,6 @@
 /* eslint-env jest */
 
 beforeEach(async () => {
-  jest.setTimeout(10000)
-})
-
-afterEach(async () => {
   const MongoClient = require('mongodb').MongoClient
   const Config = require('../config')
   try {
@@ -15,4 +11,5 @@ afterEach(async () => {
     console.log('Encountered error when cleaning up test database')
     console.log(e)
   }
+  jest.setTimeout(10000)
 })

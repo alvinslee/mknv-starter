@@ -18,16 +18,23 @@ router.post('/', async (ctx) => {
       if (user) {
         if (await user.validPassword(params.password)) {
           ctx.body.success = true
+          const expiresAt = Math.floor(Date.now() / 1000) + Config.session.timeoutSeconds
           ctx.body.token = jwt.sign({
-            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            exp: expiresAt,
             data: {
               userId: user.id
             }
           }, Config.jwt.secret)
+          ctx.body.userId = user.id
+          ctx.body.expiresIn = Config.session.timeoutSeconds
+        } else {
+          ctx.body.message = 'Password fail'
         }
+      } else {
+        ctx.body.message = 'User not found'
       }
     } catch (e) {
-      console.log(e)
+      ctx.body.message = e
       ctx.status = 500
     }
   }

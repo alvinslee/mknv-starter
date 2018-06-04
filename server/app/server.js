@@ -24,6 +24,19 @@ protectedApi.use(Config.api.prefix + Users.routePrefix, Users.routes)
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'))
 }
+
+app.use(async (ctx, next) => {
+  ctx.response.set('Access-Control-Allow-Origin', 'http://localhost:8081')
+  ctx.response.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  ctx.response.set('Access-Control-Allow-Headers', 'accepts,content-type')
+  ctx.response.set('Access-Control-Allow-Credentials', true)
+  if (ctx.request.method === 'OPTIONS') {
+    ctx.response.status = 200
+  } else {
+    return next()
+  }
+})
+
 app
   .use(bodyParser())
   .use(unprotectedApi.routes())

@@ -19,8 +19,13 @@ let jwt = {
   secret: 'rEplaCE tHiS w1th y0Ur oWn 5ecr3t!'
 }
 
+let session = {
+  timeoutSeconds: 60 * 60 // 1 hour
+}
+
 module.exports = {
   database,
   jwt,
-  api
+  api,
+  session
 }
