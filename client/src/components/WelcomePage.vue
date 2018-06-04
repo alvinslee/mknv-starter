@@ -4,7 +4,7 @@
       <h1 class="display-4">Welcome!</h1>
       <p class="lead">This is a boilerplate starter project for the MongoDB-Koa-Node-Vue framework.</p>
       <hr class="my-4">
-      <p>The backend API needs to be running as a separate node process. It's expected to be running here: <strong>{{ apiRoot }}</strong></p>
+      <p>The backend API needs to be running as a separate node process. It's expected to be available here: <strong>{{ apiPath }}</strong></p>
       <div class="links">
         <router-link to="/signup"><button class="btn btn-primary">Sign Up</button></router-link>
         <router-link to="/authenticate"><button class="btn btn-primary">Sign In</button></router-link>
@@ -19,7 +19,7 @@ import Config from '@/config'
 export default {
   data: () => {
     return {
-      apiRoot: Config.api.root
+      apiPath: Config.api.root + Config.api.path
     }
   }
 }
