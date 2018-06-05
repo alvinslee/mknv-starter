@@ -7,17 +7,17 @@
     </div>
     <nav>
       <ul>
-        <li>
+        <li v-if="!isAuthenticated">
           <router-link to="/signup">Create New Account</router-link>
         </li>
-        <li>
-          <router-link to="/authenticate">Sign In</router-link>
-        </li>
-        <li>
+        <li v-if="isAuthenticated">
           <router-link to="/dashboard">Dashboard</router-link>
         </li>
-        <li>
-          <router-link to="/signout">Sign Out</router-link>
+        <li v-if="!isAuthenticated">
+          <router-link to="/authenticate">Sign In</router-link>
+        </li>
+        <li v-if="isAuthenticated">
+          <a href="#" @click="signout">Sign Out</a>
         </li>
       </ul>
     </nav>
@@ -26,7 +26,18 @@
 
 <script>
 
-export default {}
+export default {
+  methods: {
+    signout () {
+      this.$store.dispatch('signout')
+    }
+  },
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    }
+  }
+}
 
 </script>
 

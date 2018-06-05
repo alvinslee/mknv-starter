@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios'
 // import globalAxios from 'axios'
-// import router from '../router'
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -45,12 +45,20 @@ export default new Vuex.Store({
             userId: response.data.userId
           })
           dispatch('setLogoutTimer', response.data.expiresIn)
+          router.replace('/dashboard')
         } else {
           console.log('FAIL')
         }
       } catch (error) {
         console.log(error)
       }
+    },
+    signout ({commit}) {
+      commit('clearAuthData')
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('expiresAt')
+      router.replace('/')
     }
   },
   getters: {
@@ -58,7 +66,7 @@ export default new Vuex.Store({
       return state.userId
     },
     isAuthenticated (state) {
-      return state.token !== null
+      return state.authToken !== null
     }
   }
 })
