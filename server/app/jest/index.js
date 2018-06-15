@@ -4,7 +4,7 @@ beforeEach(async () => {
   const MongoClient = require('mongodb').MongoClient
   const Config = require('../config')
   try {
-    const client = await MongoClient.connect('mongodb://localhost:27017/')
+    const client = await MongoClient.connect(Config.database.url)
     const db = client.db(Config.database.name)
     db.dropDatabase()
   } catch (e) {
