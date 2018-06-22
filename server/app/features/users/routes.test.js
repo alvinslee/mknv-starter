@@ -7,7 +7,6 @@ const Users = require('./index')
 const UserController = Users.controller
 const UserFactory = Users.factory
 const jwt = require('jsonwebtoken')
-const itHasBehavior = require('../../jest/itHasBehavior')
 
 const routePrefix = Config.api.prefix + Users.routePrefix
 
@@ -16,7 +15,8 @@ let createSavedUser = async () => {
 }
 
 let createToken = (user) => {
-  return jwt.sign({ data: { userId: user.id } }, Config.jwt.secret)
+  const expiresAt = Math.floor(Date.now() / 1000) + Config.session.timeoutSeconds
+  return jwt.sign({ exp: expiresAt, data: { userId: user.id } }, Config.jwt.secret)
 }
 
 afterEach(() => {
@@ -26,8 +26,8 @@ afterEach(() => {
 describe('Users (Routes)', () => {
   describe('GET ' + routePrefix + '/', () => {
     const route = routePrefix + '/'
-    const method = 'get'
-    itHasBehavior('responds with 403 if token authorization fails', { method, route })
+    it('calls authenticateToken() middleware', async () => {
+    })
     it('responds with an array of Users, as JSON', async () => {
       let user = await createSavedUser()
       let token = await createToken(user)

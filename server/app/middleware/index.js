@@ -2,7 +2,7 @@ const User = require('../features/users/model')
 const Config = require('../config')
 const jwt = require('jsonwebtoken')
 
-let setAccessControl = async (ctx, next) => {
+const setAccessControl = async (ctx, next) => {
   ctx.response.set('Access-Control-Allow-Origin', 'http://localhost:8081')
   ctx.response.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
   ctx.response.set('Access-Control-Allow-Headers', 'accepts,content-type')
@@ -14,7 +14,7 @@ let setAccessControl = async (ctx, next) => {
   }
 }
 
-let authenticateToken = async (ctx, next) => {
+const authenticateToken = async (ctx, next) => {
   try {
     const token = ctx.headers.authorization
     if (token) {
