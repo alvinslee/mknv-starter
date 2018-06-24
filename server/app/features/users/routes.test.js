@@ -1,6 +1,7 @@
 /* eslint-env jasmine */
 
-const server = require('../../server')
+const app = require('../../app')
+const server = app.listen(process.env.PORT || 8080)
 const Config = require('../../config')
 const request = require('supertest')
 const Users = require('./index')
@@ -26,8 +27,6 @@ afterEach(() => {
 describe('Users (Routes)', () => {
   describe('GET ' + routePrefix + '/', () => {
     const route = routePrefix + '/'
-    it('calls authenticateToken() middleware', async () => {
-    })
     it('responds with an array of Users, as JSON', async () => {
       let user = await createSavedUser()
       let token = await createToken(user)
