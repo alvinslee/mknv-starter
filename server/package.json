@@ -7,10 +7,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
-    "test_watch": "jest --watch --notify",
+    "test": "jest --detectOpenHandles --runInBand",
+    "test_watch": "jest --watch --notify --runInBand",
     "test_debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "retest": "jest --onlyFailures --detectOpenHandles --forceExit",
+    "retest": "jest --onlyFailures --detectOpenHandles --runInBand",
     "watch": "nodemon --watch 'src/**/*' -e js app/server.js",
     "server": "node app/server.js",
     "lint": "eslint --ext .js,.vue src"

@@ -1,7 +1,6 @@
 /* eslint-env jasmine */
 
-const app = require('../../app')
-const server = app.listen(process.env.PORT || 8080)
+const server = require('../../server')
 const Config = require('../../config')
 const request = require('supertest')
 const Users = require('./index')
@@ -19,10 +18,6 @@ let createToken = (user) => {
   const expiresAt = Math.floor(Date.now() / 1000) + Config.session.timeoutSeconds
   return jwt.sign({ exp: expiresAt, data: { userId: user.id } }, Config.jwt.secret)
 }
-
-afterEach(() => {
-  server.close()
-})
 
 describe('Users (Routes)', () => {
   describe('GET ' + routePrefix + '/', () => {

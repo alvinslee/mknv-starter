@@ -11,10 +11,6 @@ const User = Users.model
 const routePrefix = Config.api.prefix + Accounts.routePrefix
 const itHasBehavior = require('../../jest/itHasBehavior')
 
-afterEach(() => {
-  server.close()
-})
-
 describe('Accounts (Routes)', () => {
   describe('PUT ' + routePrefix + '/', () => {
     const method = 'put'

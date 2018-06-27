@@ -12,10 +12,6 @@ const Authentication = require('./index')
 
 const routePrefix = Config.api.prefix + Authentication.routePrefix
 
-afterEach(() => {
-  server.close()
-})
-
 function itRespondsWithNoToken ({ method, route, params, user }) {
   it('expects response.body not to include token', async () => {
     await user.save()

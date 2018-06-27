@@ -11,5 +11,5 @@ beforeEach(async () => {
     console.log('Encountered error when cleaning up test database')
     console.log(e)
   }
-  jest.setTimeout(10000)
+  jest.setTimeout(5000)
 })
